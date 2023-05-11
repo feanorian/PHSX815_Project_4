@@ -5,8 +5,7 @@ Project 4
 Due Date 5/8/2023
 This code performs exploratory data analysis on AGN data from the AGN Black Hole Mass database
 """
-import s
-ys
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
@@ -48,26 +47,32 @@ if __name__ == "__main__":
 	clean_df['log Z'] = np.log(clean_df['Redshift'])
 
 	# Cut of AGN data by mass
-	small_bh = clean_df[clean_df['log M_BH'] <= float(mass)]
-	large_bh = clean_df[clean_df['log M_BH'] > float(mass)]
+	small_bh = clean_df[clean_df['log M_BH'] < float(mass)]
+	large_bh = clean_df[clean_df['log M_BH'] >= float(mass)]
 
 	# clean redshift data
 	data1 = (small_bh['log Z'],)
 	data2 = (large_bh['log Z'],)
-
-	# Bootstrap of stdev of log(Z) for small and large mass AGN
-	small_boot_std_z = bootstrap(data1, np.std, confidence_level=0.95,random_state=rng)
-	large_boot_std_z = bootstrap(data2, np.std, confidence_level=0.95,random_state=rng)
 	
 	# Bootstrap om mean of log(Z) for small and large mass AGN
 	small_boot_mean_z = bootstrap(data1, np.mean, confidence_level=0.95,random_state=rng)
 	large_boot_mean_z = bootstrap(data2, np.mean, confidence_level=0.95,random_state=rng)
 
-	small_boot_std_z_data = small_boot_std_z.bootstrap_distribution
+	# True Mean
+
+	true_small = np.median(small_boot_mean_z.bootstrap_distribution)
+	true_large = np.median(large_boot_mean_z.bootstrap_distribution)
+	# STDEV of log (Z)
+	small_boot_std_z = small_boot_mean_z.standard_error
+	large_boot_std_z = large_boot_mean_z.standard_error
+
+	# Distribution of log (Z)
 	small_boot_mean_z_data = small_boot_mean_z.bootstrap_distribution
-	large_boot_std_z_data = large_boot_std_z.bootstrap_distribution
 	large_boot_mean_z_data = large_boot_mean_z.bootstrap_distribution
 
+	textstr = '\n'.join((
+    	rf'$log{{Z}}_s:  {round(true_small, 4)} ,\sigma_{{z,s}}$ = {round(small_boot_std_z, 4)}',
+    	rf'$log{{Z}}_l:  {round(true_large, 4)} ,\sigma_{{z,l}}$= {round(large_boot_std_z, 4)}'))
 
 	# plot regression lines for total data
 	ax = plt.axes()
@@ -77,33 +82,7 @@ if __name__ == "__main__":
 	#plt.savefig('total_reg')
 	plt.show()
 
-	# plot regression lines for large mass AGN
-	ax1 = plt.axes()
-	sns.regplot(x='log Z',y='log M_BH', data = large_bh,line_kws = {'color':'red'})
-	plt.title('log(M_BH) vs log(z) for large AGN')
-	plt.xlabel('Redshift (log(z))')
-	#plt.savefig('large_reg')
-	plt.show()
-
-	# plot regression lines for small mass AGN
-	ax2 = plt.axes()
-	sns.regplot(x='log Z',y='log M_BH', data = small_bh,line_kws = {'color':'red'})
-	plt.title('log(M_BH) vs log(z) for small AGN')
-	plt.xlabel('Redshift (log(z))')
-	#plt.savefig('small_reg')
-	plt.show()
-
-	# histplot for mean of STD of log(Z)
-	fig, ax = plt.subplots()
-	sns.histplot(small_boot_std_z_data, stat='probability',bins=25, color = 'salmon', element="step",fill=True, alpha=.3, label=rf'$M_{{BH}} < 10^{{{mass}}} M_{{Sun}}$')
-	sns.histplot(large_boot_std_z_data, bins=25, stat = 'probability',color = 'aqua', element="step",fill=True, alpha=.3, label=rf'$M_{{BH}} > 10^{{{mass}}} M_{{Sun}}$')
-	ax.set_title(r'Bootstrap Distribution for $\sigma_{log(Z)}$ AGN M_BH')
-	ax.set_xlabel('standard deviation')
-	ax.set_ylabel('probability')
-	plt.legend()
-	#plt.savefig('hist_sigma_boot')
-	plt.show()
-
+	
 	# Histplot for mean of log(Z)
 	fig1, ax1 = plt.subplots()
 	sns.histplot(small_boot_mean_z_data, stat='probability',bins=25, color = 'salmon', element="step",fill=True, alpha=.3, label=rf'$M_{{BH}} < 10^{{{mass}}} M_{{Sun}}$')
@@ -111,6 +90,7 @@ if __name__ == "__main__":
 	ax1.set_title('Bootstrap Distribution for log(Z) based on AGN M_BH')
 	ax1.set_xlabel('mean log (Z)')
 	ax1.set_ylabel('probability')
+	plt.annotate(textstr, xy=(0.05, 0.65), xycoords='axes fraction')
 	plt.legend()
 	#plt.savefig('hist_logz_boot')
 	plt.show()
