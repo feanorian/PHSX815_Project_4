@@ -19,3 +19,5 @@ Exploratory data analysis for AGN black hole masses
 `-f`: filename for the data
 
 `-mass`: This will be the mass split of the data. These will be orders of magnitude. Practically for AGN's, this will be a float between 6.0 and 10.5
+
+# NOTE: Ensure you have the latest version of scipy installed (version 1.10.0)
