@@ -1,4 +1,12 @@
-import sys
+"""
+Name: Craig Brooks
+PHSX 815 Spring 2023
+Project 4
+Due Date 5/8/2023
+This code performs exploratory data analysis on AGN data from the AGN Black Hole Mass database
+"""
+import s
+ys
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
