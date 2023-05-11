@@ -1,3 +1,11 @@
+"""
+Name: Craig Brooks
+PHSX 815 Spring 2023
+Project 4
+Due Date 5/8/2023
+This code determines the log-likelihood a high-mass AGN is at high redshift or (H0) or low redshift (H1)
+"""
+
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
