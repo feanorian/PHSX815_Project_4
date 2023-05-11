@@ -1,5 +1,8 @@
 # PHSX815_Project_4
+This project uses data from the  <a href="https://iopscience.iop.org/article/10.1086/679601">AGN Black Hole Database</a> to do exploratory data analysis
+on the relatioship between redshift and black hole mass for AGNs. The likelihood of an AGN being at a higher or lower redshift based on its mass is also determined.
 
+http://www.astro.gsu.edu/AGNmass/
 # agn_eda.py
 Exploratory data analysis for AGN black hole masses
 ## Usage:
