@@ -8,9 +8,15 @@ http://www.astro.gsu.edu/AGNmass/
 Exploratory data analysis for AGN black hole masses
 ## Usage:
 
+![hist_logz_boot](https://github.com/feanorian/PHSX815_Project_4/assets/12628872/552a5b47-060e-4409-a18f-7facdce1e9a0)
+
+
 `python3 agn_eda.py -f filname -mass mass`
 
 # ll_analysis.py
+
+![LLR](https://github.com/feanorian/PHSX815_Project_4/assets/12628872/79a6ab3c-2f62-48f2-9daa-25244485b772)
+
 
 ## Usage:
 
