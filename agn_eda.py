@@ -66,7 +66,7 @@ if __name__ == "__main__":
 	sns.regplot(x = 'log Z',y = 'log M_BH',data=clean_df, line_kws = {'color':'red'})
 	plt.title('AGN log(M_BH) vs log(z)')
 	plt.xlabel('Redshift (log(z))')
-	plt.savefig('total_reg')
+	#plt.savefig('total_reg')
 	plt.show()
 
 	# plot regression lines for large mass AGN
@@ -74,7 +74,7 @@ if __name__ == "__main__":
 	sns.regplot(x='log Z',y='log M_BH', data = large_bh,line_kws = {'color':'red'})
 	plt.title('log(M_BH) vs log(z) for large AGN')
 	plt.xlabel('Redshift (log(z))')
-	plt.savefig('large_reg')
+	#plt.savefig('large_reg')
 	plt.show()
 
 	# plot regression lines for small mass AGN
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 	sns.regplot(x='log Z',y='log M_BH', data = small_bh,line_kws = {'color':'red'})
 	plt.title('log(M_BH) vs log(z) for small AGN')
 	plt.xlabel('Redshift (log(z))')
-	plt.savefig('small_reg')
+	#plt.savefig('small_reg')
 	plt.show()
 
 	# histplot for mean of STD of log(Z)
@@ -93,7 +93,7 @@ if __name__ == "__main__":
 	ax.set_xlabel('standard deviation')
 	ax.set_ylabel('probability')
 	plt.legend()
-	plt.savefig('hist_sigma_boot')
+	#plt.savefig('hist_sigma_boot')
 	plt.show()
 
 	# Histplot for mean of log(Z)
@@ -104,5 +104,5 @@ if __name__ == "__main__":
 	ax1.set_xlabel('mean log (Z)')
 	ax1.set_ylabel('probability')
 	plt.legend()
-	plt.savefig('hist_logz_boot')
+	#plt.savefig('hist_logz_boot')
 	plt.show()
