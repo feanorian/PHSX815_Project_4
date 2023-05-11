@@ -101,5 +101,5 @@ if __name__ == "__main__":
 	plt.axvline(x = find_nearest(likelihoodr_H0, value=0.0), color='r', label=rf'LH0 = LH1')
 	plt.annotate(textstr, xy=(0.05, 0.65), xycoords='axes fraction')
 	plt.legend()
-	plt.savefig('LLR')
+	#plt.savefig('LLR')
 	plt.show()
